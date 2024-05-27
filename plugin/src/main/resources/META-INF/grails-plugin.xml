@@ -1,0 +1,3 @@
+<plugin name='policy'>
+  <type>org.graceframework.plugins.policy.PolicyGrailsPlugin</type>
+</plugin>

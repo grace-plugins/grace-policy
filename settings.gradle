@@ -1,0 +1,3 @@
+rootProject.name = 'grace-policy'
+
+include 'plugin'
