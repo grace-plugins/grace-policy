@@ -20,7 +20,6 @@ group "org.graceframework.plugins"
 apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "groovy"
-apply plugin: "org.graceframework.asset-pipeline"
 apply plugin: "org.graceframework.grace-plugin"
 apply plugin: "maven-publish"
 apply plugin: "signing"
@@ -68,18 +67,6 @@ jar {
     enabled = true
     archiveClassifier.set('')
     includeEmptyDirs = false
-}
-
-assets {
-    assetsPath = 'app/assets'
-    minifyJs = false
-    minifyCss = true
-    minifyOptions = [
-        languageMode: 'ES5',
-        targetLanguage: 'ES5',
-        optimizationLevel: 'SIMPLE'
-    ]
-    packagePlugin = true
 }
 
 bootJar.enabled = false
