@@ -23,6 +23,48 @@ dependencies {
 }
 ```
 
+
+### Creating a Policy
+
+In `app/controllers`,
+
+```groovy
+class PostController {
+
+    def show(Long id) {
+        def post = postService.get(id)
+        authorize post
+        // some
+    }
+
+}
+```
+
+In `app/policies`, create a `Policy` for `PostController`,
+
+```groovy
+class PostPolicy {
+
+    def show() {
+        record.status == 'PUBLISHED' || record.author.id == user.id || user.hasRole('ROLE_ADMIN')
+    }
+
+}
+```
+
+`policy` plugin provides `authorize(record, options)` for your `Controllers`,
+
+```groovy
+// Without record (null)
+authorize() 
+
+// With post, use PostPolicy, actionName is the rule
+authorize(post)
+
+// Use custom Policy and rule
+authorize(post, [with: NewPostPolicy, to: 'manage'])
+```
+
 ## Development
 
 ### Build from source
@@ -37,6 +79,11 @@ cd grace-policy
 
 * Grace 2022.0.0+
 * Grails 3.0+
+
+## Roadmap
+
+* Spring Security integration
+* Support Grails Service
 
 ## License
 
