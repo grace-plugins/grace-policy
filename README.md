@@ -23,34 +23,35 @@ dependencies {
 }
 ```
 
+### Basic Usage
 
-### Creating a Policy
+The core component of this plugin is a policy class. `Policy` class describes how you control access to resources.
 
-In `app/controllers`,
+We suggest having a separate policy class for each resource and encourage you to follow these conventions:
 
-```groovy
-class PostController {
+* put `policies` into the `app/policies` folder;
+* name policies using the corresponding singular resource name (domain name) with a `Policy` suffix, e.g. `Post -> PostPolicy`;
+* name rules using a predicate form of the corresponding activity (typically, a controller's action), e.g. `PostsController#update -> PostPolicy#update`.
 
-    def show(Long id) {
-        def post = postService.get(id)
-        authorize post
-        // some
-    }
+### Writing Policies
 
-}
-```
+`Policy` class contains predicate methods (rules) which are used to authorize activities.
 
-In `app/policies`, create a `Policy` for `PostController`,
+A Policy is instantiated with the target record (authorization object) and the authorization context (by default equals to `user`):
 
 ```groovy
 class PostPolicy {
 
-    def show() {
-        record.status == 'PUBLISHED' || record.author.id == user.id || user.hasRole('ROLE_ADMIN')
+    def update() {
+        record?.author?.id == user?.id || user?.isAdmin()
     }
 
 }
 ```
+
+### Using with Controllers
+
+In most cases, you do not have to do anything except writing policy files and adding `authorize` calls.
 
 `policy` plugin provides `authorize(record, options)` for your `Controllers`,
 
