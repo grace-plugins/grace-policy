@@ -32,6 +32,7 @@ dependencies {
     compileOnly "org.springframework.boot:spring-boot-autoconfigure:$springBootVersion"
     compileOnly "javax.servlet:javax.servlet-api:$servletVersion"
     compileOnly "org.graceframework:grace-core:$graceVersion"
+    compileOnly "org.graceframework:grace-plugin-controllers:$graceVersion"
     compileOnly "org.graceframework:grace-web-common:$graceVersion"
 }
 
@@ -71,6 +72,8 @@ jar {
 
 bootJar.enabled = false
 bootRun.enabled = false
+findMainClass.enabled = false
+shell.enabled = false
 
 publishing {
     publications {

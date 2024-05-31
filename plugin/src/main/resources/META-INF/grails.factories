@@ -1,0 +1,6 @@
+grails.compiler.traits.TraitInjector=\
+grace.compiler.traits.PolicyTraitInjector,\
+grace.compiler.traits.ControllerPolicyTraitInjector
+
+grails.core.ArtefactHandler=\
+org.graceframework.plugins.policy.GracePolicyArtefactHandler

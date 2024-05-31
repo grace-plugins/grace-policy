@@ -15,6 +15,7 @@
  */
 package org.graceframework.plugins.policy
 
+import grace.plugins.policy.GracePolicyClass
 import grails.plugins.Plugin
 import grails.util.GrailsUtil
 
@@ -54,5 +55,18 @@ Authorization plugin for Grails/Grace applications.
 
     // Online location of the plugin's browseable source code.
     def scm = [ url: "https://github.com/grace-plugins/grace-policy" ]
+
+
+    Closure doWithSpring() {
+        { ->
+            def application = grailsApplication
+            def policyClasses = application.getArtefacts(GracePolicyArtefactHandler.TYPE)
+            for (GracePolicyClass policy : policyClasses) {
+                "${policy.fullName}"(policy.clazz) { bean ->
+                    bean.autowire = 'byName'
+                }
+            }
+        }
+    }
 
 }
