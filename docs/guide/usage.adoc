@@ -1,0 +1,59 @@
+== Getting Started
+
+Add dependency to the `build.gradle`,
+
+[source,groovy]
+----
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.graceframework.plugins:policy:VERSION"
+}
+----
+
+=== Basic Usage
+
+The core component of this plugin is a policy class. `Policy` class describes how you control access to resources.
+
+We suggest having a separate policy class for each resource and encourage you to follow these conventions:
+
+* put `policies` into the `app/policies` folder;
+* name policies using the corresponding singular resource name (domain name) with a `Policy` suffix, e.g. `Post -> PostPolicy`;
+* name rules using a predicate form of the corresponding activity (typically, a controller's action), e.g. `PostsController#update -> PostPolicy#update`.
+
+=== Writing Policies
+
+`Policy` class contains predicate methods (rules) which are used to authorize activities.
+
+A Policy is instantiated with the target record (authorization object) and the authorization context (by default equals to `user`):
+
+[source,groovy]
+----
+class PostPolicy {
+
+    def update() {
+        record?.author?.id == user?.id || user?.isAdmin()
+    }
+
+}
+----
+
+=== Using with Controllers
+
+In most cases, you do not have to do anything except writing policy files and adding `authorize` calls.
+
+`policy` plugin provides `authorize(record, options)` for your `Controllers`,
+
+[source,groovy]
+----
+// Without record (null)
+authorize() 
+
+// With post, use PostPolicy, actionName is the rule
+authorize(post)
+
+// Use custom Policy and rule
+authorize(post, [with: NewPostPolicy, to: 'manage'])
+----
