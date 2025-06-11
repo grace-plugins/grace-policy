@@ -40,7 +40,7 @@ Authorization plugin for Grails/Grace applications.
     def profiles = ['web']
 
     // URL to the plugin's documentation
-    def documentation = "https://github.com/grace-plugins/grace-policy"
+    def documentation = "https://plugins.graceframework.org/grace-policy/0.2.0-SNAPSHOT/"
 
     // Extra (optional) plugin metadata
 
