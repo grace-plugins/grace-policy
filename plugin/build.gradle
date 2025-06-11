@@ -93,6 +93,8 @@ publishing {
 
             from components.java
 
+            artifact source: "${project.sourceSets.main.groovy.classesDirectory.get()}/META-INF/grails-plugin.xml", classifier: "plugin", extension: 'xml'
+
             pom {
                 name = "Grace Policy Plugin"
                 description = "Authorization plugin for Grails/Grace applications."
