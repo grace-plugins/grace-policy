@@ -27,7 +27,7 @@ import grails.util.GrailsUtil
  */
 class PolicyGrailsPlugin extends Plugin {
 
-    def version = '0.2.0-SNAPSHOT'
+    def version = '0.3.0-SNAPSHOT'
     def grailsVersion = GrailsUtil.getGrailsVersion()
     def dependsOn = [controllers: grailsVersion]
 
@@ -40,7 +40,7 @@ Authorization plugin for Grails/Grace applications.
     def profiles = ['web']
 
     // URL to the plugin's documentation
-    def documentation = "https://plugins.graceframework.org/grace-policy/0.2.0-SNAPSHOT/"
+    def documentation = "https://plugins.graceframework.org/grace-policy/0.3.0-SNAPSHOT/"
 
     // Extra (optional) plugin metadata
 
